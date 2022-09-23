@@ -2,7 +2,7 @@
 Scrapes discord chats and writes them into file
 
 **Modules**:
-  discord
-  requests
-  os
+  discord,
+  requests,
+  os,
   json
