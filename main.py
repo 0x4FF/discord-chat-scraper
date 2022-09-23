@@ -6,7 +6,7 @@ token = ""
 
 
 @client.command()
-async def cs(ctx,server_id, channel_id):
+async def cs(ctx,server_id, channel_id, condition):
     await ctx.message.delete()
     
     with open(f'{channel_id}.txt', 'w+') as file:
@@ -19,7 +19,11 @@ async def cs(ctx,server_id, channel_id):
             Content: \"{str(value['content'])}\"\n\n\n\t
             Message Link: https://discordapp.com/channels/{server_id}/{str(value['channel_id'])}/{str(value['id'])}\n=================================="""
             file.write(format)
-            await ctx.send(format)
-    os.unlink(f"{channel_id}")
-    
+            if condition == "file":
+                await ctx.send(file=discord.File(f'{channel_id}.txt'))
+                break
+
+            else:
+                await ctx.send(format)
+
 client.run(token, bot=False)
